@@ -9,7 +9,7 @@
     "e2e": "ng e2e",
     "lite": "lite-server",
     "preinstall": "npm install -g @angular/cli @angular/compiler-cli typescript",
-    "postinstall": "ng build --prod"
+    "postinstall": "ng build "
   },
   "private": true,
   "dependencies": {
