@@ -1,0 +1,60 @@
+<div class="col-md-12 m-3 ">
+	<h1>{{page_title}}</h1>
+	
+	<div class="alert alert-success md-5 m-3" *ngIf="status == 'success'">
+		los datos se guardaron correctamente.
+	</div>
+
+	<div class="alert alert-danger md-5 m-3" *ngIf="status == 'error'">
+		Los datos no se han guardado.
+	</div>
+
+	<form class="col-md-6 m-3" #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)">
+		<div class="form-group">
+			<label for="fullname">Nombre y Apellido</label>
+			<input type="text" name="fullname" class="form-control text-uppercase" #fullname="ngModel" [(ngModel)]="user.fullname" required pattern="[a-zA-Z ]{2,254}">
+			
+			<small *ngIf="!fullname.valid && fullname.touched" class="invalid-feedback d-block">
+				El nombre no es válido
+			</small>
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="text" name="email" class="form-control text-uppercase" #email="ngModel" [(ngModel)]="user.email" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"> 
+
+			<small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+				El email no es válido
+			</small>
+		</div>
+		
+		<!--
+		<div class="form-group">
+			<label for="image">Avatar</label>
+			<input type="file" name="avatar" class="form-control text-uppercase" #avatar="ngModel" [(ngModel)]="user.avatar" >
+		</div>
+			-->
+				
+		<div class="form-group"> 
+			<label >Avatar</label>
+
+			<div *ngIf="identity && identity.avatar">
+				<img src="{{url + 'user/avatar/' + identity.avatar}}" class="avatar">
+			</div>
+			<angular-file-uploader
+			      [config]="afuConfig" 
+			      (ApiResponse)="avatarUpload($event)">
+			</angular-file-uploader>
+		</div>
+		<hr>
+		
+		<!--
+		<hr>
+		<div class="form-group"> 
+			<label for="blog">Editor</label>
+			<textarea [froalaEditor]="froala_options"></textarea>
+		</div>
+		-->
+
+		<input type="submit" name="Confirmar" value="Guardar" class="btn btn-success mt-2" [disabled]="userEditForm.invalid">
+	</form>
+</div>

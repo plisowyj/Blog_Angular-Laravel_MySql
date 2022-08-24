@@ -1,0 +1,39 @@
+<div class="col-md-12 m-3 ">
+	<h1>{{page_title}}</h1>
+	
+	<div class="alert alert-success md-5 m-3" *ngIf="status == 'success'">
+		El registro se completó correctamente. <a [routerLink]="['/login']">Ya puedes ingresar desde aquí!</a>
+	</div>
+
+	<div class="alert alert-danger md-5 m-3" *ngIf="status == 'error'">
+		El registro NO se completó correctamente.
+	</div>
+
+	<form class="col-md-6 m-3" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+		<div class="form-group">
+			<label for="fullname">Nombre y Apellido</label>
+			<input type="text" name="fullname" class="form-control text-uppercase" #fullname="ngModel" [(ngModel)]="user.fullname" required pattern="[a-zA-Z ]{2,254}">
+			
+			<small *ngIf="!fullname.valid && fullname.touched" class="invalid-feedback d-block">
+				El nombre no es válido
+			</small>
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="text" name="email" class="form-control text-uppercase" #email="ngModel" [(ngModel)]="user.email" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"> 
+
+			<small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+				El email no es válido
+			</small>
+		</div>
+		<div class="form-group">
+			<label for="password">Contraseña</label>
+			<input type="password" name="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" required >
+
+			<small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">
+				La password no es válida
+			</small>
+		</div>
+		<input type="submit" name="Registrarme" class="btn btn-success mt-2" [disabled]="registerForm.invalid">
+	</form>
+</div>

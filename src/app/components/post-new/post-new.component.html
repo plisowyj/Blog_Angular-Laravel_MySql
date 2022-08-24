@@ -1,0 +1,35 @@
+<div class="col-md-12 m-3 ">
+	<h1>{{page_title}}</h1>
+
+	<p>
+		Añade una nueva publicacion al Post
+	</p>
+	<div class="alert alert-success md-5 m-3" *ngIf="status == 'success'">
+		los datos se guardaron correctamente.
+	</div>
+
+	<div class="alert alert-danger md-5 m-3" *ngIf="status == 'error'">
+		Los datos no se han guardado.
+	</div>
+	<form class="col-md-5 ml-0 pl-0" #postNew="ngForm" (ngSubmit)="onSubmit(postNew)">
+		<div class="form-group">
+			<label for="post">Post</label>
+			<input type="text" name="post" class="form-control text-uppercase" #postref="ngModel" [(ngModel)]="post.post" required >
+			
+			<small *ngIf="!postref.valid && postref.touched" class="invalid-feedback d-block">
+				El Post no es válido
+			</small>
+		</div>
+		<div class="form-group mt-2">
+			<label for="image">Imagen</label>
+			<angular-file-uploader
+			      [config]="afuConfig" 
+			      (ApiResponse)="imageUpload($event)">
+			</angular-file-uploader>
+
+		</div>
+		<input type="submit" value="Guardar" class="btn btn-success mt-2" [disabled]="postNew.invalid" />
+	</form>
+	<br/>
+</div>
+

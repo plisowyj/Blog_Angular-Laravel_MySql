@@ -1,0 +1,57 @@
+<div class="container"> 
+ <br> 
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="color: black;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="assets/images/blog.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      Blog
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" [routerLink]="['/inicio']">Inicio</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right" *ngIf="!identity.fullname">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" [routerLink]="['/login']">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" [routerLink]="['/registro']">Registro</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right" *ngIf="identity && identity.fullname">
+        <li *ngIf="identity && identity.avatar" class="nav-item">
+          <div class="avatar-mask">
+            <img src="{{url + 'user/avatar/' + identity.avatar}}" class="avatar-nav">
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-has-popup=true>
+            {{identity.fullname}}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" [routerLink]="['/crear-entrada']">Crear Entrada</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/ajustes']">Ajustes</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/logout/1']">Salir</a></li>
+            
+          </ul>
+        </li>
+        
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+
+<!-- CONTENIDO-->
+<router-outlet></router-outlet>
+
+
+<footer>Master Dev - Demo Plisowyj &copy; </footer>
+</div>
